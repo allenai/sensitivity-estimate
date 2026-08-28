@@ -62,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
     sns.despine(fig=figure)
 
     title = args.title or f"{metric_label} of executed CruxEval functions"
-    aes.set_figure_title(figure, title, f"{args.input.stem}, n = {len(values)}")
+    aes.set_figure_title(figure, title)
     output = args.output or Path("figures") / args.metric
     pdf_path, _ = aes.save_figure(output, fig=figure, save_png=True)
     print(f"wrote {pdf_path}")
