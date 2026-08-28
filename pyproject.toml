@@ -1,7 +1,23 @@
 [project]
 name = "sensitivity-estimate"
 version = "0.1.0"
-description = "Add your description here"
+description = "Estimate suffix-influence sensitivity of real code via dynamic execution traces"
 readme = "README.md"
-requires-python = ">=3.14"
-dependencies = []
+requires-python = ">=3.12"
+dependencies = [
+    "datasets>=4.0",
+    "tqdm>=4.67",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+    "ruff>=0.14",
+]
+
+[project.scripts]
+sensitivity-estimate = "sensitivity_estimate.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
