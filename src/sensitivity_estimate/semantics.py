@@ -25,7 +25,15 @@ class SensitivitySummary:
     num_events: int
     num_variables: int
     sensitivity_density: float
-    """Mean over trace boundaries of (live variables / trace variables)."""
+    """Mean over trace boundaries of (live variables / trace variables).
+
+    This is state-bench's ``sensitivity_coverage``. state-bench's density
+    additionally divides by the number of queried outputs (the per-output
+    influence rate); a traced call returns exactly one output, so density,
+    coverage, and per-output influence all coincide and ``mean_live_fanout``
+    is identically 1. ``to_dict`` emits ``sensitivity_coverage`` as an alias
+    so records join cleanly against state-bench columns.
+    """
     mean_live_variables: float
     max_live_variables: int
     return_dependency_length: int
@@ -36,6 +44,7 @@ class SensitivitySummary:
             "num_events": self.num_events,
             "num_variables": self.num_variables,
             "sensitivity_density": self.sensitivity_density,
+            "sensitivity_coverage": self.sensitivity_density,
             "mean_live_variables": self.mean_live_variables,
             "max_live_variables": self.max_live_variables,
             "return_dependency_length": self.return_dependency_length,
